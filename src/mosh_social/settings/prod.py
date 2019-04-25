@@ -1,9 +1,20 @@
-from .base import *
-
+import requests
 import sentry_sdk as sentry
+from .base import *
 from sentry_sdk.integrations.django import DjangoIntegration
 
-ALLOWED_HOSTS = ['.mosh-social-dev.eu-central-1.elasticbeanstalk.com', ]
+
+def get_ec2_instance_ip():
+    try:
+        ip = requests.get('http://169.254.169.254/latest/meta-data/local-ipv4', timeout=0.01).text
+    except requests.exceptions.ConnectionError:
+        return None
+    del requests
+    return ip
+
+
+AWS_LOCAL_IP = get_ec2_instance_ip()
+ALLOWED_HOSTS = [AWS_LOCAL_IP, '.mosh-social-dev.eu-central-1.elasticbeanstalk.com', ]
 CORS_ORIGIN_WHITELIST = ['.mosh-social-dev.eu-central-1.elasticbeanstalk.com', ]
 
 DATABASES = {
