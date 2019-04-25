@@ -3,6 +3,9 @@ from .base import *
 import sentry_sdk as sentry
 from sentry_sdk.integrations.django import DjangoIntegration
 
+ALLOWED_HOSTS = ['.mosh-social-dev.eu-central-1.elasticbeanstalk.com', ]
+CORS_ORIGIN_WHITELIST = ['.mosh-social-dev.eu-central-1.elasticbeanstalk.com', ]
+
 DATABASES = {
     'default': {
         'ATOMIC_REQUESTS': True,
