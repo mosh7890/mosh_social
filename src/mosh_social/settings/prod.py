@@ -1,7 +1,7 @@
 from .base import *
 
-# import sentry_sdk as sentry
-# from sentry_sdk.integrations.django import DjangoIntegration
+import sentry_sdk as sentry
+from sentry_sdk.integrations.django import DjangoIntegration
 
 DATABASES = {
     'default': {
@@ -41,4 +41,4 @@ AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=94608000',
 }
 
-# sentry.init(config('SENTRY_DSN'), integrations=[DjangoIntegration()])
+sentry.init(config('SENTRY_DSN'), integrations=[DjangoIntegration()])
