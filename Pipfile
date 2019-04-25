@@ -1,0 +1,32 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+coverage = "*"
+django-coverage-plugin ="*"
+django-debug-toolbar = "*"
+django-extensions = "*"
+nplusone = "*"
+Werkzeug = "*"
+
+[packages]
+argon2-cffi ="*"
+boto3 = "*"
+Collectfast = "*"
+django = "*"
+djangorestframework = "*"
+django-allauth = "*"
+django-cors-headers = "*"
+django-rest-auth = "*"
+django-stdimage = "*"
+django-storages = "*"
+drf-extensions = "*"
+mysqlclient = "*"
+psycopg2 = "*"
+python-decouple = "*"
+sentry-sdk = "*"
+
+[requires]
+python_version = "3.7"
