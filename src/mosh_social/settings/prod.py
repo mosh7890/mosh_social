@@ -9,7 +9,6 @@ def get_ec2_instance_ip():
         ip = requests.get('http://169.254.169.254/latest/meta-data/local-ipv4', timeout=0.01).text
     except requests.exceptions.ConnectionError:
         return None
-    del requests
     return ip
 
 
