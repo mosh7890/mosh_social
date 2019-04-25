@@ -41,4 +41,5 @@ AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=94608000',
 }
 
-sentry.init(config('SENTRY_DSN'), integrations=[DjangoIntegration()])
+if config('SENTRY_ENABLED', cast=bool, default=False):
+    sentry.init(config('SENTRY_DSN'), integrations=[DjangoIntegration()])
