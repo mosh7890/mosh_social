@@ -8,6 +8,7 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv(), default=['*'])
 CORS_ORIGIN_WHITELIST = config('CORS_ORIGIN_WHITELIST', cast=Csv(), default=['*'])
 WSGI_APPLICATION = 'mosh_social.wsgi.application'
 ROOT_URLCONF = 'mosh_social.urls'
+ASGI_APPLICATION = 'mosh_social.routing.application'
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'Asia/Jerusalem'
 USE_I18N = True
@@ -29,6 +30,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
+    'channels',
     'corsheaders',
     'rest_auth',
     'rest_auth.registration',

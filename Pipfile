@@ -9,11 +9,13 @@ django-coverage-plugin ="*"
 django-debug-toolbar = "*"
 django-extensions = "*"
 nplusone = "*"
+pypiwin32 = "*"
 Werkzeug = "*"
 
 [packages]
 argon2-cffi ="*"
 boto3 = "*"
+channels = "*"
 Collectfast = "*"
 django = "*"
 djangorestframework = "*"
@@ -27,6 +29,7 @@ mysqlclient = "*"
 psycopg2 = "*"
 python-decouple = "*"
 sentry-sdk = "*"
+twisted = {extras = ["http2", "tls"],version = "*"}
 
 [requires]
 python_version = "3.7"
