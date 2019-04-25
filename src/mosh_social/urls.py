@@ -10,8 +10,8 @@ from django.views.generic.base import RedirectView
 from .views import index
 
 urlpatterns = [
-    # path('favicon.ico',
-    #      RedirectView.as_view(url=staticfiles_storage.url('images/favicon.ico'), permanent=False)),
+    path('favicon.ico',
+         RedirectView.as_view(url=staticfiles_storage.url('images/favicon.ico'), permanent=False)),
     path('robots.txt',
          lambda x: HttpResponse('User-Agent: *\nDisallow:', content_type='text/plain'), name='robots_file'),
     path('', index, name='index'),
