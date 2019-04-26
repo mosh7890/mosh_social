@@ -31,6 +31,10 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.facebook',
     'channels',
     'corsheaders',
+    'health_check',
+    'health_check.db',
+    'health_check.cache',
+    'health_check.storage',
     'rest_auth',
     'rest_auth.registration',
     'rest_framework',
@@ -127,3 +131,8 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 )
+
+SESSION_COOKIE_HTTPONLY = True
+CSRF_COOKIE_HTTPONLY = True
+SECURE_BROWSER_XSS_FILTER = True
+X_FRAME_OPTIONS = "DENY"

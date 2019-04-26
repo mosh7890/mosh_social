@@ -56,6 +56,6 @@ AWS_S3_OBJECT_PARAMETERS = {
 if config('SENTRY_ENABLED', cast=bool, default=False):
     sentry.init(config('SENTRY_DSN'), integrations=[DjangoIntegration()])
 
-CSRF_COOKIE_HTTPONLY = True
-SECURE_BROWSER_XSS_FILTER = True
-X_FRAME_OPTIONS = "DENY"
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True

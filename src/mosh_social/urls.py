@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from django.urls import include, path
 from django.views import defaults as default_views
 from django.views.generic.base import RedirectView
+from health_check import urls as health_urls
 
 from .views import index
 
@@ -16,6 +17,7 @@ urlpatterns = [
          lambda x: HttpResponse('User-Agent: *\nDisallow:', content_type='text/plain'), name='robots_file'),
     path('', index, name='index'),
     path('admin/login/', admin.site.urls),
+    path('health/', include(health_urls)),
     path('api/', include('posts.urls')),
     path('api/', include('users.urls')),
     *static(settings.STATIC_URL, document_root=settings.STATIC_URL),
