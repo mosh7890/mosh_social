@@ -13,8 +13,7 @@ def get_ec2_instance_ip():
 
 
 AWS_LOCAL_IP = get_ec2_instance_ip()
-ALLOWED_HOSTS = [AWS_LOCAL_IP, '.mosh-social-dev.eu-central-1.elasticbeanstalk.com', ]
-CORS_ORIGIN_WHITELIST = ['.mosh-social-dev.eu-central-1.elasticbeanstalk.com', ]
+ALLOWED_HOSTS.append(AWS_LOCAL_IP)
 
 DATABASES = {
     'default': {
@@ -42,9 +41,9 @@ MEDIAFILES_LOCATION = 'media'
 
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = 'mosh-social'
-AWS_S3_REGION_NAME = 'eu-central-1'
-AWS_S3_CUSTOM_DOMAIN = 'mosh-social.s3.amazonaws.com'
+AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_REGION_NAME = config('AWS_S3_REGION_NAME')
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 AWS_DEFAULT_ACL = None
 AWS_PRELOAD_METADATA = True
 AWS_QUERYSTRING_AUTH = False
@@ -56,3 +55,7 @@ AWS_S3_OBJECT_PARAMETERS = {
 
 if config('SENTRY_ENABLED', cast=bool, default=False):
     sentry.init(config('SENTRY_DSN'), integrations=[DjangoIntegration()])
+
+CSRF_COOKIE_HTTPONLY = True
+SECURE_BROWSER_XSS_FILTER = True
+X_FRAME_OPTIONS = "DENY"

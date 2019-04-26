@@ -4,6 +4,7 @@ from decouple import config, Csv
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 DEBUG = config('DJANGO_DEBUG', cast=bool, default=True)
 SECRET_KEY = config('SECRET_KEY')
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv(), default=['*'])
 WSGI_APPLICATION = 'mosh_social.wsgi.application'
 ROOT_URLCONF = 'mosh_social.urls'
 ASGI_APPLICATION = 'mosh_social.routing.application'
@@ -126,7 +127,3 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 )
-
-CSRF_COOKIE_HTTPONLY = True
-SECURE_BROWSER_XSS_FILTER = True
-X_FRAME_OPTIONS = "DENY"
