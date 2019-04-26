@@ -20,13 +20,13 @@ DATABASES = {
         'ATOMIC_REQUESTS': True,
         'CONN_MAX_AGE': config('CONN_MAX_AGE', default=60),
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('RDS_DB_NAME'),
-        'USER': config('RDS_USERNAME'),
-        'PASSWORD': config('RDS_PASSWORD'),
-        'HOST': config('RDS_HOSTNAME'),
-        'PORT': config('RDS_PORT'),
+        'NAME': config('RDS_DB_NAME', default=''),
+        'USER': config('RDS_USERNAME', default=''),
+        'PASSWORD': config('RDS_PASSWORD', default=''),
+        'HOST': config('RDS_HOSTNAME', default=''),
+        'PORT': config('RDS_PORT', default=''),
         'TEST': {
-            'NAME': f'test_{config("RDS_DB_NAME")}',
+            'NAME': f'test_{config("RDS_DB_NAME", default="")}',
         },
     }
 }
@@ -39,10 +39,10 @@ STATICFILES_LOCATION = 'static'
 DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
 MEDIAFILES_LOCATION = 'media'
 
-AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
-AWS_S3_REGION_NAME = config('AWS_S3_REGION_NAME')
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID', default='')
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY', default='')
+AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME', default='')
+AWS_S3_REGION_NAME = config('AWS_S3_REGION_NAME', default='')
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 AWS_DEFAULT_ACL = None
 AWS_PRELOAD_METADATA = True
@@ -54,8 +54,17 @@ AWS_S3_OBJECT_PARAMETERS = {
 }
 
 if config('SENTRY_ENABLED', cast=bool, default=False):
-    sentry.init(config('SENTRY_DSN'), integrations=[DjangoIntegration()])
+    sentry.init(config('SENTRY_DSN', default=''), integrations=[DjangoIntegration()])
 
-SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_BROWSER_XSS_FILTER = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
+X_FRAME_OPTIONS = "DENY"
+CSRF_COOKIE_HTTPONLY = True
+SESSION_COOKIE_HTTPONLY = True
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+SECURE_HSTS_SECONDS = 1000000
+SECURE_HSTS_PRELOAD = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_FRAME_DENY = True
